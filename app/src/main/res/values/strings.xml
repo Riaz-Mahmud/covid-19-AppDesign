@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Covid-19</string>
+    <string name="statistics">Statistics</string>
+    <string name="affected">Affected</string>
+    <string name="_336_851">336,851</string>
+    <string name="death">Death</string>
+    <string name="_9_620">9,620</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="today">Today</string>
+    <string name="total">Total</string>
+    <string name="global">Global</string>
+    <string name="my_country">My Country</string>
+    <string name="notification">Notification</string>
+    <string name="daily_new_cases">Daily New Cases</string>
+</resources>
