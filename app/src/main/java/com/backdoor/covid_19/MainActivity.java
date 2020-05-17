@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,8 +27,13 @@ public class MainActivity extends AppCompatActivity {
     BarDataSet barDataSet;
     ArrayList arrayList;
 
+    Animation fromLeft, fromRight;
+
     LinearLayout myCountryLinearLayout, globalLinearLayout;
     TextView myCountryTxt, globalTxt;
+
+    boolean myCountry = false;
+    boolean Global = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //getGraphEntries();
+
+        fromLeft = AnimationUtils.loadAnimation(this, R.anim.from_left);
+        fromRight = AnimationUtils.loadAnimation(this, R.anim.from_right);
 
         myCountryLinearLayout = findViewById(R.id.myCountryLinearLayout);
         globalLinearLayout = findViewById(R.id.globalLinearLayout);
@@ -43,10 +53,15 @@ public class MainActivity extends AppCompatActivity {
         myCountryLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myCountryLinearLayout.setBackgroundResource(R.drawable.selected_bar_top_white);
-                globalLinearLayout.setBackgroundResource(R.drawable.selected_bar_top);
-                myCountryTxt.setTextColor(getResources().getColor(R.color.background));
-                globalTxt.setTextColor(getResources().getColor(R.color.white));
+                if (myCountry){
+                    globalLinearLayout.setBackgroundResource(0);
+                    myCountryLinearLayout.setBackgroundResource(R.drawable.selected_bar_top_white);
+                    myCountryTxt.setTextColor(getResources().getColor(R.color.background));
+                    globalTxt.setTextColor(getResources().getColor(R.color.white));
+                    myCountryLinearLayout.startAnimation(fromRight);
+                    myCountry = false;
+                    Global = true;
+                }
 
             }
         });
@@ -54,10 +69,15 @@ public class MainActivity extends AppCompatActivity {
         globalLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myCountryLinearLayout.setBackgroundResource(R.drawable.selected_bar_top);
-                globalLinearLayout.setBackgroundResource(R.drawable.selected_bar_top_white);
-                myCountryTxt.setTextColor(getResources().getColor(R.color.white));
-                globalTxt.setTextColor(getResources().getColor(R.color.background));
+                if (Global){
+                    myCountryLinearLayout.setBackgroundResource(0);
+                    globalLinearLayout.setBackgroundResource(R.drawable.selected_bar_top_white);
+                    myCountryTxt.setTextColor(getResources().getColor(R.color.white));
+                    globalTxt.setTextColor(getResources().getColor(R.color.background));
+                    globalLinearLayout.startAnimation(fromLeft);
+                    myCountry = true;
+                    Global = false;
+                }
             }
         });
 
